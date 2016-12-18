@@ -1,0 +1,11 @@
+--- libdeflate-0.6/Makefile.orig	2016-10-28 05:51:32.000000000 +0200
++++ libdeflate-0.6/Makefile	2016-12-18 20:50:59.347818140 +0100
+@@ -125,7 +125,7 @@
+ 
+ # Create shared library
+ $(SHARED_LIB):$(SHARED_LIB_OBJ)
+-	$(QUIET_CCLD) $(CC) -o $@ $(LDFLAGS) $(LIB_CFLAGS) -shared $+
++	$(QUIET_CCLD) $(CC) -o $@ $(LDFLAGS) $(LIB_CFLAGS) -shared $+ -Wl,-soname,libdeflate.so.0
+ 
+ DEFAULT_TARGETS += $(SHARED_LIB)
+ 

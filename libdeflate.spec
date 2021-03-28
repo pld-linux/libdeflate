@@ -1,14 +1,13 @@
 Summary:	Library for fast, whole-buffer DEFLATE-based compression and decompression
 Summary(pl.UTF-8):	Biblioteka do szybkiej kompresji i dekompresji algorytmem DEFLATE dla całego bufora
 Name:		libdeflate
-Version:	0.6
+Version:	1.7
 Release:	1
 License:	MIT
 Group:		Libraries
 #Source0Download: https://github.com/ebiggers/libdeflate/releases
 Source0:	https://github.com/ebiggers/libdeflate/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	fd0e3b8bc7e0486e218b67d982f2fa99
-Patch0:		%{name}-soname.patch
+# Source0-md5:	1b97660f1b4527422e33f3bab1e6acca
 URL:		https://github.com/ebiggers/libdeflate
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -58,7 +57,6 @@ Statyczna biblioteka libdeflate.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__make} \
@@ -69,14 +67,12 @@ Statyczna biblioteka libdeflate.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir},%{_includedir}}
 
-install gzip $RPM_BUILD_ROOT%{_bindir}/libdeflate-gzip
-install gunzip $RPM_BUILD_ROOT%{_bindir}/libdeflate-gunzip
-install libdeflate.so $RPM_BUILD_ROOT%{_libdir}/libdeflate.so.0
-ln -sf libdeflate.so.0 $RPM_BUILD_ROOT%{_libdir}/libdeflate.so
-cp -p libdeflate.a $RPM_BUILD_ROOT%{_libdir}
-cp -p libdeflate.h $RPM_BUILD_ROOT%{_includedir}
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT \
+	BINDIR=%{_bindir} \
+	INCDIR=%{_includedir} \
+	LIBDIR=%{_libdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT

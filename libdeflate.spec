@@ -62,13 +62,20 @@ Statyczna biblioteka libdeflate.
 %{__make} \
 	CC="%{__cc}" \
 	CFLAGS="%{rpmcflags}" \
+	CPPFLAGS="%{rpmcppflags}" \
 	LDFLAGS="%{rpmldflags}" \
 	V=1
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
+# pass also build flags because of .build-config check in Makefile
 %{__make} install \
+	CC="%{__cc}" \
+	CFLAGS="%{rpmcflags}" \
+	CPPFLAGS="%{rpmcppflags}" \
+	LDFLAGS="%{rpmldflags}" \
+	V=1 \
 	DESTDIR=$RPM_BUILD_ROOT \
 	BINDIR=%{_bindir} \
 	INCDIR=%{_includedir} \

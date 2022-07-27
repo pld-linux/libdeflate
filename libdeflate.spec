@@ -1,13 +1,13 @@
 Summary:	Library for fast, whole-buffer DEFLATE-based compression and decompression
 Summary(pl.UTF-8):	Biblioteka do szybkiej kompresji i dekompresji algorytmem DEFLATE dla całego bufora
 Name:		libdeflate
-Version:	1.7
-Release:	2
+Version:	1.12
+Release:	1
 License:	MIT
 Group:		Libraries
 #Source0Download: https://github.com/ebiggers/libdeflate/releases
 Source0:	https://github.com/ebiggers/libdeflate/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	1b97660f1b4527422e33f3bab1e6acca
+# Source0-md5:	038cb9addf76c450115b7de0a6427a84
 URL:		https://github.com/ebiggers/libdeflate
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -89,7 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc COPYING NEWS README.md
+%doc COPYING NEWS.md README.md
 %attr(755,root,root) %{_bindir}/libdeflate-gzip
 %attr(755,root,root) %{_bindir}/libdeflate-gunzip
 %attr(755,root,root) %{_libdir}/libdeflate.so.0
@@ -98,6 +98,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libdeflate.so
 %{_includedir}/libdeflate.h
+%{_pkgconfigdir}/libdeflate.pc
 
 %files static
 %defattr(644,root,root,755)

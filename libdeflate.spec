@@ -1,14 +1,15 @@
 Summary:	Library for fast, whole-buffer DEFLATE-based compression and decompression
 Summary(pl.UTF-8):	Biblioteka do szybkiej kompresji i dekompresji algorytmem DEFLATE dla całego bufora
 Name:		libdeflate
-Version:	1.12
+Version:	1.17
 Release:	1
 License:	MIT
 Group:		Libraries
 #Source0Download: https://github.com/ebiggers/libdeflate/releases
 Source0:	https://github.com/ebiggers/libdeflate/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	038cb9addf76c450115b7de0a6427a84
+# Source0-md5:	88cecda43f00fcffb62fd2a398f7554e
 URL:		https://github.com/ebiggers/libdeflate
+BuildRequires:	cmake >= 3.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -59,27 +60,18 @@ Statyczna biblioteka libdeflate.
 %setup -q
 
 %build
-%{__make} \
-	CC="%{__cc}" \
-	CFLAGS="%{rpmcflags}" \
-	CPPFLAGS="%{rpmcppflags}" \
-	LDFLAGS="%{rpmldflags}" \
-	V=1
+install -d build
+cd build
+%cmake ..
+
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 # pass also build flags because of .build-config check in Makefile
-%{__make} install \
-	CC="%{__cc}" \
-	CFLAGS="%{rpmcflags}" \
-	CPPFLAGS="%{rpmcppflags}" \
-	LDFLAGS="%{rpmldflags}" \
-	V=1 \
-	DESTDIR=$RPM_BUILD_ROOT \
-	BINDIR=%{_bindir} \
-	INCDIR=%{_includedir} \
-	LIBDIR=%{_libdir}
+%{__make} -C build install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -99,6 +91,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libdeflate.so
 %{_includedir}/libdeflate.h
 %{_pkgconfigdir}/libdeflate.pc
+%{_libdir}/cmake/libdeflate
 
 %files static
 %defattr(644,root,root,755)

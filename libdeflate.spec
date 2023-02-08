@@ -10,6 +10,7 @@ Source0:	https://github.com/ebiggers/libdeflate/archive/v%{version}/%{name}-%{ve
 # Source0-md5:	88cecda43f00fcffb62fd2a398f7554e
 URL:		https://github.com/ebiggers/libdeflate
 BuildRequires:	cmake >= 3.7
+BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description

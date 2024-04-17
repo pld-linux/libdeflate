@@ -1,13 +1,13 @@
 Summary:	Library for fast, whole-buffer DEFLATE-based compression and decompression
 Summary(pl.UTF-8):	Biblioteka do szybkiej kompresji i dekompresji algorytmem DEFLATE dla całego bufora
 Name:		libdeflate
-Version:	1.17
+Version:	1.20
 Release:	1
 License:	MIT
 Group:		Libraries
 #Source0Download: https://github.com/ebiggers/libdeflate/releases
 Source0:	https://github.com/ebiggers/libdeflate/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	88cecda43f00fcffb62fd2a398f7554e
+# Source0-md5:	14494b58c42b3bf65b4c469a8e4252ab
 URL:		https://github.com/ebiggers/libdeflate
 BuildRequires:	cmake >= 3.7
 BuildRequires:	rpmbuild(macros) >= 1.605

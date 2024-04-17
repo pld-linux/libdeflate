@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_without	static_libs	# static library
+
 Summary:	Library for fast, whole-buffer DEFLATE-based compression and decompression
 Summary(pl.UTF-8):	Biblioteka do szybkiej kompresji i dekompresji algorytmem DEFLATE dla całego bufora
 Name:		libdeflate
@@ -10,7 +14,7 @@ Source0:	https://github.com/ebiggers/libdeflate/archive/v%{version}/%{name}-%{ve
 # Source0-md5:	14494b58c42b3bf65b4c469a8e4252ab
 URL:		https://github.com/ebiggers/libdeflate
 BuildRequires:	cmake >= 3.7
-BuildRequires:	rpmbuild(macros) >= 1.605
+BuildRequires:	rpmbuild(macros) >= 1.742
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -63,7 +67,8 @@ Statyczna biblioteka libdeflate.
 %build
 install -d build
 cd build
-%cmake ..
+%cmake .. \
+	%{cmake_on_off static_libs LIBDEFLATE_BUILD_STATIC_LIB}
 
 %{__make}
 
@@ -94,6 +99,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/libdeflate.pc
 %{_libdir}/cmake/libdeflate
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libdeflate.a
+%endif
